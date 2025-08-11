@@ -3,63 +3,189 @@
 #include <string>
 
 
-    class Game {
+class Game {
 private:
     std::vector<std::string> Players;
     std::string bingoword;
+    const std::vector<std::string> hangmanStages= {
+
+            R"(
+
+
+
+     ===)",
+
+
+
+            R"(      |
+
+      |
+
+      |
+
+      |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +   |
+
+      |
+
+      |
+
+      |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+      |
+
+      |
+
+      |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+  |   |
+
+      |
+
+      |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+  |   |
+
+  O   |
+
+      |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+  |   |
+
+  O   |
+
+  |   |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+  |   |
+
+  O   |
+
+ /|   |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+  |   |
+
+  O   |
+
+ /|\  |
+
+      |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+  |   |
+
+  O   |
+
+ /|\  |
+
+ /    |
+
+     ===)",
+
+
+
+            R"(  +---+
+
+  |   |
+
+  0   |
+
+ /|\  |
+
+ / \  |
+
+     ===)"
+
+    };
+
 public:
-    Game(const std::vector<std::string>& players1, const std::string b) : Players(players1), bingoword(b) {}
+    Game(const std::vector<std::string>& players1, const std::string& b) : Players(players1), bingoword(b) {}
 
 
-    void displayfailure(int count) {
-        switch (count) {
-            case 1:
-                std::cout << " \\" << std::endl;
+    void displayfailure(int fail_count) {
+        for (int i = 0; i < hangmanStages.size(); i++) {
+            if (i+1 == fail_count) {
+                std::cout << hangmanStages[fail_count - 1];
                 break;
-            case 2:
-                std::cout << "/";
-                std::cout << " \\" << std::endl;
-                break;
-            case 3:
-                std::cout << " |\n"
-                             " |\n"
-                             " |\n"
-                             " |\n";
-
-                std::cout << "/";
-                std::cout << " \\" << std::endl;
-                break;
-            case 4:
-
-                std::cout << "  _ _ _ _ _" << std::endl;
-                std::cout << " |\n"
-                             " |\n"
-                             " |\n"
-                             " |\n";
-
-                std::cout << "/";
-                std::cout << " \\" << std::endl;
-                break;
+            }
         }
     }
 
-
-
-
+    
     void gameplay() {
-            std::string word(bingoword.size(),'_');
-            std::cout << word;
-            int count = 0;
+        std::string word(bingoword.size(),'_');
+        std::cout << word;
+        int total_failure = hangmanStages.size();
+        int fail_count = 0;
         do {
             char letter;
-            size_t j;
+
 
             for (size_t i = 0; i < Players.size(); i++) {
                 bool isThere = false;
                 std::cout << "\nWähle einen Buchstabe aus, " << Players[i] << ": ";
                 std::cin >> letter;
 
-                for ( j = 0; j < bingoword.size(); j++) {
+                for (size_t j = 0; j < bingoword.size(); j++) {
                     if (letter == bingoword[j]) {
                         word[j] = letter;
                         isThere = true;
@@ -67,24 +193,23 @@ public:
                 }
 
                 if (!isThere) {
-                    count++;
-                    displayfailure(count);
+                    fail_count++;
+                    displayfailure(fail_count);
                 }
 
-                std::cout << "Wort Status: " << std::endl;
-
+                std::cout << "\nWord Status: " << std::endl;
                 std::cout << word;
-                if (bingoword == word) {
-                    break;
-                }
+
             }
-        } while (bingoword != word);
+        } while (bingoword != word && fail_count != total_failure);
 
-        std::cout << "\n\ngewonnen!" << std::endl;
-
+        if (fail_count == total_failure) {
+            std::cout << "\n\nVERLOREN" << std::endl;
+        }
+        else {
+            std::cout << "\n\nGEWONNEN!" << std::endl;
+        }
     }
-
-
 
 };
 
