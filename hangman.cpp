@@ -171,11 +171,32 @@ public:
       }
     }
 
+  void welcomeScreen(){
+      std::cout << "\n _ _ _ _ _ _ " << std::endl;
+      std::cout << "|           |" << std::endl;
+      std::cout << "|  Hangman  |";
+      std::cout << "\n|_ _ _ _ _ _|" << std::endl;
+    std::cout << std::endl;
+
+  }
+
+  void isRight_screen(){
+      std::cout << "\n _ _ _ _ _ _ " << std::endl;
+      std::cout << "|           |" << std::endl;
+      std::cout << "|  Richtig! |";
+      std::cout << "\n|_ _ _ _ _ _|" << std::endl;
+    std::cout << std::endl;
+
+  }  
+
+
 
     void gameplay() {
         std::string word(bingoword.size(),'-');
-    
-    std::cout << word;
+      
+        welcomeScreen();
+
+        std::cout << word << std::endl;
         int total_failure = hangmanStages.size();
         int fail_count = 0;
         do {
@@ -198,6 +219,9 @@ public:
                     fail_count++;
                     displayfailure(fail_count);
                 }
+                else {
+                    isRight_screen();                    
+                  }
 
                 std::cout << "\nWord Status: " << std::endl;
                 std::cout << word;
@@ -225,16 +249,16 @@ int main(int argc, char*argv[]) {
         return 1;
     }
 
-    int count;
+    int player_count;
     std::string  name;
     std::vector<std::string> Players;
     std::string bingoword;
 
     std::cout << "Wie viele Spieler?: ";
-    std::cin >> count;
+    std::cin >> player_count;
     std::cout << "\n";
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < player_count; i++) {
         std::cout << "Wie heißt dein Spieler: ";
         std::cin >> name;
         Players.emplace_back(name);
