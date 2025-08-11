@@ -186,12 +186,7 @@ public:
                 std::cin >> letter;
 
                 for (size_t j = 0; j < bingoword.size(); j++) {
-                    if (letter == word[j]) {
-                        std::cout << "already there" << std::endl;
-                        isThere = true;
-                        break;
-                    }
-                    else if (letter == bingoword[j]) {
+                    if (letter == bingoword[j]) {
                         word[j] = letter;
                         isThere = true;
                     }
