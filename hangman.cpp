@@ -162,18 +162,20 @@ public:
 
 
     void displayfailure(int fail_count) {
-        for (int i = 0; i < hangmanStages.size(); i++) {
-            if (i+1 == fail_count) {
-                std::cout << hangmanStages[fail_count - 1];
-                break;
-            }
-        }
+      if (fail_count < 1) return;
+      for (int i = 0; i < hangmanStages.size(); i++) {
+          if (i+1 == fail_count) {
+              std::cout << hangmanStages[fail_count - 1];
+              break;
+          }
+      }
     }
 
 
     void gameplay() {
-        std::string word(bingoword.size(),'_');
-        std::cout << word;
+        std::string word(bingoword.size(),'-');
+    
+    std::cout << word;
         int total_failure = hangmanStages.size();
         int fail_count = 0;
         do {
@@ -200,8 +202,8 @@ public:
 
                 std::cout << "\nWord Status: " << std::endl;
                 std::cout << word;
-
             }
+
         } while (bingoword != word && fail_count != total_failure);
 
         if (fail_count == total_failure) {
