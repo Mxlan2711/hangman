@@ -192,7 +192,6 @@ public:
                         word[j] = letter;
                         isThere = true;
                     }
-
                 }
 
                 if (!isThere) {
@@ -202,6 +201,9 @@ public:
 
                 std::cout << "\nWord Status: " << std::endl;
                 std::cout << word;
+                
+                if (bingoword == word) break;
+
             }
 
         } while (bingoword != word && fail_count != total_failure);
