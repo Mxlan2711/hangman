@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include <fstream>
 
 class Game {
 private:
@@ -219,11 +219,17 @@ public:
 };
 
 
-int main() {
+int main(int argc, char*argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " [file]" << std::endl;
+        return 1;
+    }
+
     int count;
     std::string  name;
     std::vector<std::string> Players;
     std::string bingoword;
+
     std::cout << "Wie viele Spieler?: ";
     std::cin >> count;
     std::cout << "\n";
@@ -234,8 +240,9 @@ int main() {
         Players.emplace_back(name);
     }
 
-    std::cout << "Welches Wort für Hangman: ";
-    std::cin >> bingoword;
+
+    std::ifstream file(argv[1]);
+    file >> bingoword;
 
     Game game(Players,bingoword);
 
