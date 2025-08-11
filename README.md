@@ -7,8 +7,8 @@ The game displays ASCII art for each failed attempt and ends when the word is gu
 
 ## 📦 Features
 - Multiplayer support
+- Reads the **word to guess** from a file provided as a command-line argument
 - ASCII art for each stage of failure
-- Dynamic word selection before the game starts
 - Simple console-based interface
 
 ---
