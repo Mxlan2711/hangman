@@ -233,15 +233,9 @@ public:
             }
 
         } while (bingoword != word && fail_count != total_failure);
+        std::cout << std::endl;
 
-        if (fail_count == total_failure) {
-            std::cout << std::endl;
-            print_screen(lose);
-        }
-        else {
-            std::cout << std::endl;
-            print_screen(win);
-        }
+        print_screen((fail_count == total_failure) ? lose : win);
     }
 };
 
