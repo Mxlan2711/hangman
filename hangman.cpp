@@ -170,31 +170,26 @@ public:
           }
       }
     }
-
-  void welcomeScreen(){
+  
+    void print_screen(std::string word) {
       std::cout << "\n _ _ _ _ _ _ " << std::endl;
       std::cout << "|           |" << std::endl;
-      std::cout << "|  Hangman  |";
+      std::cout << "|  " << word<<" |";
       std::cout << "\n|_ _ _ _ _ _|" << std::endl;
-    std::cout << std::endl;
-
-  }
-
-  void isRight_screen(){
-      std::cout << "\n _ _ _ _ _ _ " << std::endl;
-      std::cout << "|           |" << std::endl;
-      std::cout << "|  Richtig! |";
-      std::cout << "\n|_ _ _ _ _ _|" << std::endl;
-    std::cout << std::endl;
-
-  }  
+      std::cout << std::endl;
+    }   
 
 
 
     void gameplay() {
+        std::string welcome = "Hangman!";
+        std::string correct = "Richtig!";
+        std::string win = "GEWONNEN";
+        std::string lose = "VERLOREN";
+
         std::string word(bingoword.size(),'-');
       
-        welcomeScreen();
+        print_screen(welcome);
 
         std::cout << word << std::endl;
         int total_failure = hangmanStages.size();
@@ -220,11 +215,11 @@ public:
                     displayfailure(fail_count);
                 }
                 else {
-                    isRight_screen();                    
+                    print_screen(correct);                    
                   }
 
                 std::cout << "\nWord Status: " << std::endl;
-                std::cout << word;
+                std::cout << word << std::endl;
                 
                 if (bingoword == word) break;
 
@@ -233,10 +228,12 @@ public:
         } while (bingoword != word && fail_count != total_failure);
 
         if (fail_count == total_failure) {
-            std::cout << "\n\nVERLOREN" << std::endl;
+            std::cout << std::endl;
+            print_screen(lose);
         }
         else {
-            std::cout << "\n\nGEWONNEN!" << std::endl;
+            std::cout << std::endl;
+            print_screen(win);
         }
     }
 
