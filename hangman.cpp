@@ -3,6 +3,16 @@
 #include <string>
 #include <fstream>
 
+void welcome_screen(){
+      std::cout << "\n _______________________________" << std::endl;
+      std::cout << "|                               |" << std::endl;
+      std::cout << "|                               |" << std::endl;
+      std::cout << "|  Willkommen zum Hangman Game! |"<< std::endl;
+      std::cout << "|                               |"<< std::endl;
+      std::cout << "|_______________________________|"<< std::endl;
+      std::cout << std::endl << std::endl;
+    }
+
 class Game {
 private:
     std::vector<std::string> Players;
@@ -170,14 +180,14 @@ public:
           }
       }
     }
-  
-    void print_screen(const std::string& word) {
+
+    void print_screen(const std::string& word) const {
       std::cout << "\n _ _ _ _ _ _ " << std::endl;
       std::cout << "|           |" << std::endl;
       std::cout << "|  " <<word<<" |";
       std::cout << "\n|_ _ _ _ _ _|" << std::endl;
       std::cout << std::endl;
-    }   
+    }
 
 
     void gameplay() {
@@ -187,7 +197,7 @@ public:
         std::string lose = "VERLOREN";
 
         std::string word(bingoword.size(),'-');
-      
+
         print_screen(welcome);
 
         std::cout << word << std::endl;
@@ -211,6 +221,7 @@ public:
                 if (!isThere) {
                     fail_count++;
                     displayfailure(fail_count);
+
                 } else {
                     print_screen(correct);
                 }
@@ -253,8 +264,10 @@ int main(int argc, char*argv[]) {
         }
             file >> bingoword;
 
+        welcome_screen();
+
         std::cout << "Wie viele Spieler seid ihr?: ";
-        std::cin >> player_count;
+          std::cin >> player_count;
         std::cout << "\n";
 
         for (int i = 0; i < player_count; i++) {
