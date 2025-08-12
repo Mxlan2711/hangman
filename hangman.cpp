@@ -174,11 +174,10 @@ public:
     void print_screen(std::string word) {
       std::cout << "\n _ _ _ _ _ _ " << std::endl;
       std::cout << "|           |" << std::endl;
-      std::cout << "|  " << word<<" |";
+      std::cout << "|  " <<word<<" |";
       std::cout << "\n|_ _ _ _ _ _|" << std::endl;
       std::cout << std::endl;
     }   
-
 
 
     void gameplay() {
@@ -236,7 +235,6 @@ public:
             print_screen(win);
         }
     }
-
 };
 
 
@@ -246,29 +244,28 @@ int main(int argc, char*argv[]) {
         return 1;
     }
 
-    int player_count;
-    std::string  name;
-    std::vector<std::string> Players;
-    std::string bingoword;
+        int player_count;
+        std::string  name;
+        std::vector<std::string> Players;
+        std::string bingoword;
 
-    std::cout << "Wie viele Spieler?: ";
-    std::cin >> player_count;
-    std::cout << "\n";
+        std::cout << "Wie viele Spieler?: ";
+        std::cin >> player_count;
+        std::cout << "\n";
 
-    for (int i = 0; i < player_count; i++) {
-        std::cout << "Wie heißt dein Spieler: ";
-        std::cin >> name;
-        Players.emplace_back(name);
-    }
+        for (int i = 0; i < player_count; i++) {
+            std::cout << "Wie heißt dein Spieler: ";
+            std::cin >> name;
+            Players.emplace_back(name);
+        }
 
 
-    std::ifstream file(argv[1]);
-    file >> bingoword;
+        std::ifstream file(argv[1]);
+        file >> bingoword;
 
-    Game game(Players,bingoword);
+        Game game(Players,bingoword);
 
-    game.gameplay();
-
+        game.gameplay();
 
     return 0;
 }
