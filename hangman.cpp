@@ -171,7 +171,7 @@ public:
       }
     }
   
-    void print_screen(std::string word) {
+    void print_screen(const std::string& word) {
       std::cout << "\n _ _ _ _ _ _ " << std::endl;
       std::cout << "|           |" << std::endl;
       std::cout << "|  " <<word<<" |";
@@ -196,7 +196,6 @@ public:
         do {
             char letter;
 
-
             for (size_t i = 0; i < Players.size(); i++) {
                 bool isThere = false;
                 std::cout << "\nWähle einen Buchstabe aus, " << Players[i] << ": ";
@@ -212,17 +211,14 @@ public:
                 if (!isThere) {
                     fail_count++;
                     displayfailure(fail_count);
+                } else {
+                    print_screen(correct);
                 }
-                else {
-                    print_screen(correct);                    
-                  }
 
                 std::cout << "\nWord Status: " << std::endl;
                 std::cout << word << std::endl;
-                
-                if (bingoword == word) break;
-                if (fail_count == total_failure) break;
 
+                if (bingoword == word || fail_count == total_failure) break;
             }
 
         } while (bingoword != word && fail_count != total_failure);
@@ -238,8 +234,8 @@ public:
     }
 };
 
-
 int main(int argc, char*argv[]) {
+
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " [file]" << std::endl;
         return 1;
@@ -249,6 +245,13 @@ int main(int argc, char*argv[]) {
         std::string  name;
         std::vector<std::string> Players;
         std::string bingoword;
+        std::ifstream file(argv[1]);
+
+        if (!file){
+            std::cerr << "Bitte übergebe ein File!" << std::endl;
+            return 1;
+        }
+            file >> bingoword;
 
         std::cout << "Wie viele Spieler seid ihr?: ";
         std::cin >> player_count;
@@ -260,12 +263,7 @@ int main(int argc, char*argv[]) {
             Players.emplace_back(name);
         }
 
-
-        std::ifstream file(argv[1]);
-        file >> bingoword;
-
         Game game(Players,bingoword);
-
         game.gameplay();
 
     return 0;
