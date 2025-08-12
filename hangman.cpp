@@ -221,6 +221,7 @@ public:
                 std::cout << word << std::endl;
                 
                 if (bingoword == word) break;
+                if (fail_count == total_failure) break;
 
             }
 
@@ -249,12 +250,12 @@ int main(int argc, char*argv[]) {
         std::vector<std::string> Players;
         std::string bingoword;
 
-        std::cout << "Wie viele Spieler?: ";
+        std::cout << "Wie viele Spieler seid ihr?: ";
         std::cin >> player_count;
         std::cout << "\n";
 
         for (int i = 0; i < player_count; i++) {
-            std::cout << "Wie heißt dein Spieler: ";
+            std::cout << "Wie heißt der " << i+1 << ". Spieler: ";
             std::cin >> name;
             Players.emplace_back(name);
         }
