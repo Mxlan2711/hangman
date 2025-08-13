@@ -221,12 +221,18 @@ public:
                 std::cout << "\nWähle einen Buchstabe aus, " << Players[i] << ": ";
                 std::cin >> letter;
 
-                for (size_t j = 0; j < bingoword.size(); j++) {
-                    if (letter == bingoword[j]) {
-                        word[j] = letter;
-                        isThere = true;
-                    } 
-                }
+              if (letter < 'a' || letter > 'z') {
+                  std::cout << "Bitte nur Buchstaben von a - z!" << std::endl;
+                  i--;
+                  continue;
+              }
+
+              for (size_t j = 0; j < bingoword.size(); j++) {
+                  if (letter == bingoword[j]) {
+                      word[j] = letter;
+                      isThere = true;
+                  } 
+              }
 
                 if (!isThere) {
                     fail_count++;
@@ -247,10 +253,14 @@ public:
                 if (bingoword == word || fail_count == total_failure) break;
             }
 
+
         } while (bingoword != word && fail_count != total_failure);
 
         std::cout << "\n";
-        print_screen((fail_count == total_failure) ? lose : win);
+
+        if (bingoword == word) {print_screen(win);}
+          else {print_screen(lose); std::cout << "\nDas gesuchte Wort war: " << bingoword << std::endl;}
+
     }
 };
 
