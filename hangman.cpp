@@ -157,7 +157,7 @@ private:
 
   |   |
 
-  0   |
+  O   |
 
  /|\  |
 
@@ -184,9 +184,18 @@ public:
     void print_screen(const std::string& word) const {
       std::cout << "\n _ _ _ _ _ _ " << std::endl;
       std::cout << "|           |" << std::endl;
-      std::cout << "|  " <<word<<" |";
+      std::cout << "| " <<word<<"  |";
       std::cout << "\n|_ _ _ _ _ _|" << std::endl;
       std::cout << std::endl;
+    }
+
+    void checkUsedLetter(const std::vector<char>& used_lets) const {
+        if (!used_lets.empty()) {
+        std::cout << "Verwendete Buchstaben: ";
+            for (const char usedlet : used_lets) {
+                  std::cout << " " << usedlet;
+                }
+        } std::cout << std::endl;
     }
 
 
@@ -195,6 +204,7 @@ public:
         std::string correct = "Richtig!";
         std::string win = "GEWONNEN";
         std::string lose = "VERLOREN";
+        std::vector<char> used_lets {};
 
         std::string word(bingoword.size(),'-');
 
@@ -215,26 +225,31 @@ public:
                     if (letter == bingoword[j]) {
                         word[j] = letter;
                         isThere = true;
-                    }
+                    } 
                 }
 
                 if (!isThere) {
                     fail_count++;
+                    used_lets.push_back(letter);
                     displayfailure(fail_count);
 
                 } else {
                     print_screen(correct);
                 }
 
+
                 std::cout << "\nWord Status: " << std::endl;
-                std::cout << word << std::endl;
+                std::cout << word << std::endl << std::endl;
+
+                checkUsedLetter(used_lets);
+
 
                 if (bingoword == word || fail_count == total_failure) break;
             }
 
         } while (bingoword != word && fail_count != total_failure);
-        std::cout << std::endl;
 
+        std::cout << "\n";
         print_screen((fail_count == total_failure) ? lose : win);
     }
 };
