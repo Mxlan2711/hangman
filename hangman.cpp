@@ -28,141 +28,141 @@ private:
 
 
             R"(      |
-
       |
-
       |
-
       |
-
       |
-
+      |
+      |
+      |
+      |
+      |
      ===)",
 
 
 
             R"(  +   |
-
       |
-
       |
-
       |
-
       |
-
+      |
+      |
+      |
+      |
+      |
      ===)",
 
 
 
             R"(  +---+
-
       |
-
       |
-
       |
-
       |
-
+      |
+      |
+      |
+      |
+      |
      ===)",
 
 
 
             R"(  +---+
-
   |   |
-
+  |   |
       |
-
       |
-
       |
-
+      |
+      |
+      |
+      |
      ===)",
 
 
 
             R"(  +---+
-
   |   |
-
+  |   |
+      |
   O   |
-
       |
-
       |
-
+      |
+      |
+      |
      ===)",
 
 
 
             R"(  +---+
-
   |   |
-
-  O   |
-
   |   |
-
       |
-
+  O   |
+      |
+  |   |
+      |
+      |
+      |
      ===)",
 
 
 
             R"(  +---+
-
   |   |
-
+  |   |
+      |  
   O   |
-
+      |
  /|   |
-
       |
-
+      |
+      |
      ===)",
 
 
 
             R"(  +---+
-
   |   |
-
-  O   |
-
- /|\  |
-
+  |   |
       |
-
+  O   |
+      |
+ /|\  |
+      |
+      |
+      |
      ===)",
 
 
 
             R"(  +---+
-
   |   |
-
+  |   |
+      |
   O   |
-
+      |
  /|\  |
-
+      |
  /    |
-
+      |
      ===)",
 
 
 
             R"(  +---+
-
   |   |
-
+  |   |
+      |  
   O   |
-
+      |
  /|\  |
-
+      |
  / \  |
-
+      |
      ===)"
 
     };
@@ -182,10 +182,10 @@ public:
     }
 
     void print_screen(const std::string& word) const {
-      std::cout << "\n _ _ _ _ _ _ " << std::endl;
-      std::cout << "|           |" << std::endl;
-      std::cout << "| " <<word<<"  |";
-      std::cout << "\n|_ _ _ _ _ _|" << std::endl;
+      std::cout << "\n  __ _ _ _ _ __" << std::endl;
+      std::cout << " |             |" << std::endl;
+      std::cout << " |   "+word+"  |" << std::endl;
+      std::cout << " |__ _ _ _ _ __|" << std::endl;
       std::cout << std::endl;
     }
 
@@ -200,7 +200,7 @@ public:
 
 
     void gameplay() {
-        std::string welcome = "Hangman!";
+        std::string welcome = "LET'S GO";
         std::string correct = "Richtig!";
         std::string win = "GEWONNEN";
         std::string lose = "VERLOREN";
@@ -210,7 +210,7 @@ public:
 
         print_screen(welcome);
 
-        std::cout << word << std::endl;
+        std::cout << "  " << word << std::endl;
         int total_failure = hangmanStages.size();
         int fail_count = 0;
         do {
@@ -222,7 +222,7 @@ public:
                 std::cin >> letter;
 
               if (letter < 'a' || letter > 'z') {
-                  std::cout << "Bitte nur Buchstaben von a - z!" << std::endl;
+                  std::cout << "\nBitte nur Buchstaben von a - z!" << std::endl;
                   i--;
                   continue;
               }
@@ -245,7 +245,7 @@ public:
 
 
                 std::cout << "\nWord Status: " << std::endl;
-                std::cout << word << std::endl << std::endl;
+                std::cout << "  " << word << std::endl << std::endl;
 
                 checkUsedLetter(used_lets);
 
